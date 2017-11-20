@@ -1,38 +1,76 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet
-} from 'react-native';
+import { Text } from 'react-native';
+import { Router, Scene } from 'react-native-router-flux';
+
 import ScarletScreen from './src/screens/ScarletScreen';
-// import GrayScreen from './src/screens/GrayScreen';
+import GrayScreen from './src/screens/GrayScreen';
+
+import BlueScreen from './src/screens/BlueScreen';
+import MaizeScreen from './src/screens/MaizeScreen';
+
+import BlackScreen from './src/screens/BlackScreen';
+import GoldScreen from './src/screens/GoldScreen';
+
+const TabIcon = ({selected, title}) => {
+  return (
+    <Text style={{color: selected ? 'red' : 'black'}}>{title}</Text>
+  );
+};
 
 const App = () => {
   return (
-    <ScarletScreen />
+    <Router>
+      <Scene key="root">
+        <Scene
+          key="tabbar"
+          tabs={true}
+          tabBarStyle={{backgroundColor: '#fff'}}
+        >
+          <Scene key="osu" title="OSU" icon={TabIcon}>
+            <Scene
+              key="scarlet"
+              component={ScarletScreen}
+              title="Scarlet"
+              initial={true}
+            />
+            <Scene
+              key="gray"
+              component={GrayScreen}
+              title="Gray"
+            />
+          </Scene>
+
+          <Scene key="um" title="UM" icon={TabIcon}>
+            <Scene
+              key="blue"
+              component={BlueScreen}
+              title="Blue"
+              initial={true}
+            />
+            <Scene
+              key="maize"
+              component={MaizeScreen}
+              title="Maize"
+            />
+          </Scene>
+
+          <Scene key="vu" title="VU" icon={TabIcon}>
+            <Scene
+              key="black"
+              component={BlackScreen}
+              title="Black"
+              initial={true}
+            />
+            <Scene
+              key="gold"
+              component={GoldScreen}
+              title="Gold"
+            />
+          </Scene>
+        </Scene>
+      </Scene>
+    </Router>
   );
-
-  // return (
-  //   <View style={styles.container}>
-  //     <Text style={styles.welcome}>
-  //       Blaarggag!
-  //     </Text>
-  //   </View>
-  // );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f5fcff'
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10
-  }
-});
 
 export default App;
